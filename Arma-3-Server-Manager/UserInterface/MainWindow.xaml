@@ -1,0 +1,48 @@
+﻿<Window DataContext="{Binding RelativeSource={RelativeSource Self}}" x:Class="Arma_3_Server_Manager.UserInterface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arma_3_Server_Manager.UserInterface"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel>
+        <Canvas HorizontalAlignment="Left" Height="278" Width="305">
+            <Button x:Name="BtnInstallServer" Click="BtnInstallServer_Click" Content="Install a server instance" Width="125" Canvas.Top="10" Canvas.Left="534" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="BtnImportModList" Click="BtnImportModList_Click" Content="Import Mod List" Width="125" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="664"/>
+            <Button x:Name="BtnStartServer" Click="BtnStartServer_Click" Content="Start Server" Width="100" Canvas.Top="215" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10"/>
+            <Button x:Name="BtnStopServer" Click="BtnStopServer_Click" Content="Stop Server" Width="100" HorizontalAlignment="Center" Canvas.Top="240" VerticalAlignment="Top" Canvas.Left="10" />
+            <Ellipse
+                x:Name="ServerStatus"
+                Width="50"
+                Height="50"
+                Fill="Gray"
+                Canvas.Left="245"
+                Canvas.Top="218" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="BtnCreateServerConfig" Click="BtnServerConfig_Click" Content="Edit Server Config" Width="125" Canvas.Left="10" Canvas.Top="124"/>
+
+        </Canvas>
+        <Canvas VerticalAlignment="Bottom">
+            <ListBox x:Name="lstMods" Height="100" Width="300" ItemsSource="{Binding modList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Canvas.Left="10" Canvas.Top="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsActive}"></CheckBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button x:Name="btnEnableSelectedMods" Content="Enable Selected Mods" Canvas.Top="120" Canvas.Left="10" Click="btnEnableSelectedMods_Click"></Button>
+            <ListBox x:Name="lstModsEnabled" Height="100" Width="300" ItemsSource="{Binding activeModList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Canvas.Left="350" Canvas.Top="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsActive}"></CheckBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Canvas>
+    </StackPanel>
+</Window>
