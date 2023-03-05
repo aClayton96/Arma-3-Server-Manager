@@ -15,18 +15,29 @@ namespace Arma_3_Server_Manager.Handlers
 
         public static List<Mod> getAvailableMods()
         {
+
             List<Mod> availableMods = new List<Mod>();
-            var modFolders = Directory.GetDirectories(ManagerConstants.modDirectory).Where(c => c.Contains("@"));
-
-            foreach(var modFolder in modFolders)
+            try
             {
+                var modFolders = Directory.GetDirectories(ManagerConstants.modDirectory).Where(c => c.Contains("@"));
 
-                var tag = Path.GetFileName(modFolder);
-                var name = tag.Substring(1);
+                foreach (var modFolder in modFolders)
+                {
 
-                availableMods.Add(new Mod(name, modFolder, tag));
+                    var tag = Path.GetFileName(modFolder);
+                    var name = tag.Substring(1);
+
+                    availableMods.Add(new Mod(name, modFolder, tag));
+                }
+
+                return availableMods;
             }
-            return availableMods;
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return new List<Mod>();
+            }
+            
         }
      }
 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Arma_3_Server_Manager.Classes
 {
-    internal class ServerProfile
+    public class ServerProfile
     {
-
+        public string Filepath { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace Arma_3_Server_Manager.Classes
 
     public class ManagerConstants
     {
-        public const string loggingLocation = "E:\\Arma 3 Server For C# Project\\Logs";
+        public const string loggingFolderName = "\\Arma 3 Server Manager Logs";
         public const string modDirectory = "E:\\Arma 3 Server For C# Project\\Arma 3 Server";
     }
 }

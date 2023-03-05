@@ -14,22 +14,36 @@ namespace Arma_3_Server_Manager.Logging
         {
             string date = DateTime.Now.ToString("yyyy-MM-dd-hh");
 
-            if (!File.Exists($"{ManagerConstants.loggingLocation}\\{date}.txt"))
+            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)) + ManagerConstants.loggingFolderName;
+
+            if(!System.IO.Directory.Exists(fileName))
             {
-                File.Create($"{ManagerConstants.loggingLocation}\\{date}.txt").Dispose();
+                System.IO.Directory.CreateDirectory(fileName);
             }
-            File.AppendAllText($"{ManagerConstants.loggingLocation}\\{date}.txt", $"exception.Message \n");
+
+            if (!File.Exists($"{fileName}\\{date}.txt"))
+            {
+                File.Create($"{fileName}\\{date}.txt").Dispose();
+            }
+            File.AppendAllText($"{fileName}\\{date}.txt", $"{exception.Message} \n");
         }
 
         public static void LogMessage(string message)
         {
             string date = DateTime.Now.ToString("yyyy-MM-dd-hh");
-            
-            if(!File.Exists($"{ManagerConstants.loggingLocation}\\{date}.txt"))
+
+            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)) + ManagerConstants.loggingFolderName;
+
+            if (!System.IO.Directory.Exists(fileName))
             {
-                File.Create($"{ManagerConstants.loggingLocation}\\{date}.txt").Dispose();
+                System.IO.Directory.CreateDirectory(fileName);
             }
-            File.AppendAllText($"{ManagerConstants.loggingLocation}\\{date}.txt", $"{message} \n");
+
+            if (!File.Exists($"{fileName}\\{date}.txt"))
+            {
+                File.Create($"{fileName}\\{date}.txt").Dispose();
+            }
+            File.AppendAllText($"{fileName}\\{date}.txt", $"{message} \n");
         }
     }
 }
